@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+:root {
+    --primary: #16140c;
+}
+
+* {
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.rightNav {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.rightNav img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.rightNav span {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.midNav {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.midNav span {
+    cursor: pointer;
+}
+
+.leftNav {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    align-items: center;
+}
+
+.leftNav .login {
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.leftNav .joinNow {
+    color: white;
+    background-color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 3px solid var(--primary);
+}
+
+.leftNav .joinNow:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        padding: 1rem;
+    }
+    .midNav {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 455px) {
+    .leftNav {
+        gap: 0.5rem;
+    }
+    .leftNav .joinNow {
+        padding: 0.4rem 0.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Register */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
