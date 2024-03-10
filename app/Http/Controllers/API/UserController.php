@@ -27,12 +27,16 @@ class UserController extends Controller
             $this->validate($request, [
                 "name" => "required|string",
                 "email" => "required|email|unique:users",
+                'location' => 'required|string',
+                'profile_picture' => 'nullable',
                 "password" => "required|string|min:6",
             ]);
 
             $user = User::create([
                 "name" => $request->name,
                 "email" => $request->email,
+                "location" => $request->location,
+                'profile_picture' => $request->profile_picture ?? 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
                 "password" => bcrypt($request->password),
             ]);
 

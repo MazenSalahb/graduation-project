@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +22,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Auth routes
 Route::get('/users', UserController::class . '@index');
-Route::post('/register', UserController::class . '@store')->middleware('guest');
-Route::post('/login', UserController::class . '@login')->middleware('guest');
+Route::post('/signup', UserController::class . '@store')->middleware('guest');
+Route::post('/signin', UserController::class . '@login')->middleware('guest');
+
+
+// Book routes
+Route::get('/books', BookController::class . '@index');
+Route::get('/books/{id}', BookController::class . '@show');
+Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
+
+
+// Category routes
+Route::get('/categories', CategoryController::class . '@index');
+Route::post('/categories', CategoryController::class . '@store');
+
+
+// Review routes
+Route::get('/reviews', ReviewController::class . '@index');
+Route::post('/reviews', ReviewController::class . '@store')->middleware('auth:sanctum');

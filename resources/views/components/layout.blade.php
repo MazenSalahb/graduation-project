@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @include('components.navbar')
+    {{-- @include('components.navbar') --}}
     {{ $slot }}
 </body>
 
