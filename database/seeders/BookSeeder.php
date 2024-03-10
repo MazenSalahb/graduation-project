@@ -33,6 +33,7 @@ class BookSeeder extends Seeder
             "user_id" => 2,
             "status" => "new",
             "availability" => "sale",
+            "price" => 265,
             "image" => "https://books.google.com/books/publisher/content/images/frontcover/KbZ9EAAAQBAJ?fife=w240-h345"
         ]);
 
@@ -55,6 +56,7 @@ class BookSeeder extends Seeder
             "user_id" => 4,
             "status" => "new",
             "availability" => "sale",
+            "price" => 150,
             "image" => "https://books.google.com/books/publisher/content/images/frontcover/xIS9EAAAQBAJ?fife=w240-h345"
         ]);
 
