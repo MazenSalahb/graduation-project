@@ -30,6 +30,7 @@ Route::post('/signin', UserController::class . '@login')->middleware('guest');
 
 // Book routes
 Route::get('/books', BookController::class . '@index');
+Route::get('/books/swap', BookController::class . '@swap');
 Route::get('/books/{id}', BookController::class . '@show');
 Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
 

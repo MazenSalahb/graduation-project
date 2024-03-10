@@ -12,7 +12,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::withAvg('reviews', 'rating')->get();
+        $books = Book::withAvg('reviews', 'rating')->take(10)->get();
         return response()->json($books);
     }
 
@@ -44,6 +44,12 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         return response()->json($book);
+    }
+
+    public function swap()
+    {
+        $swapBooks = Book::where('availability', 'swap')->withAvg('reviews', 'rating')->latest()->take(10)->get();
+        return response()->json($swapBooks);
     }
 
     /**
