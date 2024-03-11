@@ -15,40 +15,53 @@ class UserSeeder extends Seeder
     {
         // User::truncate();
         User::create([
-            "name" => "user1",
-            "email" => "user1@gmail.com",
+            "name" => "mazen",
+            "email" => "mazen@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
+            'profile_picture' => 'https://api.multiavatar.com/mazen@gmail.com',
         ]);
         User::create([
-            "name" => "user2",
-            "email" => "user2@gmail.com",
+            "name" => "ahmed",
+            "email" => "ahmed@gmail.com",
             "password" => bcrypt("ma123456"),
-            "location" => "alexandria",
+            "location" => "Cairo",
+            'profile_picture' => 'https://api.multiavatar.com/ahmed@gmail.com',
         ]);
         User::create([
-            "name" => "user3",
-            "email" => "user3@gmail.com",
+            "name" => "joe",
+            "email" => "joe@gmail.com",
             "password" => bcrypt("ma123456"),
-            "location" => "alexandria",
+            "location" => "fayom",
+            'profile_picture' => 'https://api.multiavatar.com/joe@gmail.com',
         ]);
         User::create([
-            "name" => "user4",
-            "email" => "user4@gmail.com",
+            "name" => "zaki",
+            "email" => "zaki@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
+            'profile_picture' => 'https://api.multiavatar.com/zaki@gmail.com',
         ]);
         User::create([
-            "name" => "user5",
-            "email" => "user5@gmail.com",
+            "name" => "john",
+            "email" => "john@gmail.com",
             "password" => bcrypt("ma123456"),
-            "location" => "alexandria",
+            "location" => "giza",
+            'profile_picture' => 'https://api.multiavatar.com/john@gmail.com',
         ]);
         User::create([
-            "name" => "user6",
-            "email" => "user6@gmail.com",
+            "name" => "ronaldo",
+            "email" => "ronaldo@gmail.com",
             "password" => bcrypt("ma123456"),
-            "location" => "alexandria",
+            "location" => "matroh",
+            'profile_picture' => 'https://api.multiavatar.com/ronaldo@gmail.com',
+        ]);
+        User::create([
+            "name" => "fady",
+            "email" => "fady@gmail.com",
+            "password" => bcrypt("ma123456"),
+            "location" => "suez",
+            'profile_picture' => 'https://api.multiavatar.com/fady@gmail.com',
         ]);
     }
 }

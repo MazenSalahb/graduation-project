@@ -34,7 +34,7 @@ class BookController extends Controller
         $user_id = auth()->user()->id; // Get the user_id from the authenticated user
 
         $book = Book::create(array_merge($request->all(), ['user_id' => $user_id]));
-        return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book]);
+        return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book], 201);
     }
 
     /**
@@ -52,6 +52,12 @@ class BookController extends Controller
         return response()->json($swapBooks);
     }
 
+    public function userBooks(string $id)
+    {
+        $books = Book::where('user_id', $id)->withAvg('reviews', 'rating')->latest()->get();
+        return response()->json($books);
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -65,6 +71,8 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $book = Book::find($id);
+        $book->delete();
+        return response()->json(["status" => "success", "message" => "Book deleted successfully"], 200);
     }
 }

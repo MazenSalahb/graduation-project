@@ -36,7 +36,7 @@ class UserController extends Controller
                 "name" => $request->name,
                 "email" => $request->email,
                 "location" => $request->location,
-                'profile_picture' => $request->profile_picture ?? 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg',
+                'profile_picture' => $request->profile_picture ?? 'https://api.multiavatar.com/' . $request->email,
                 "password" => bcrypt($request->password),
             ]);
 

@@ -32,7 +32,9 @@ Route::post('/signin', UserController::class . '@login')->middleware('guest');
 Route::get('/books', BookController::class . '@index');
 Route::get('/books/swap', BookController::class . '@swap');
 Route::get('/books/{id}', BookController::class . '@show');
+Route::get('/books/user/{id}', BookController::class . '@userBooks');
 Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
+Route::delete('/books/{id}', BookController::class . '@destroy')->middleware('auth:sanctum');
 
 
 // Category routes
