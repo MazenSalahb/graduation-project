@@ -12,7 +12,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::withAvg('reviews', 'rating')->take(10)->get();
+        $books = Book::where('availability', 'sale')->with('category')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 

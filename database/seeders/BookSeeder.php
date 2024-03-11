@@ -26,18 +26,6 @@ class BookSeeder extends Seeder
         ]);
 
         Book::create([
-            "title" => "Hello Beautiful (Oprah's Book Club): A Novel",
-            "author" => "Ann Napolitano",
-            "description" => "NEW YORK TIMES BESTSELLER • OPRAH’S BOOK CLUB PICK • From the author of Dear Edward comes a “powerfully affecting” (People) family story that asks: Can love make a broken person whole?",
-            "category_id" => 2,
-            "user_id" => 2,
-            "status" => "new",
-            "availability" => "sale",
-            "price" => 265,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/KbZ9EAAAQBAJ?fife=w240-h345"
-        ]);
-
-        Book::create([
             "title" => "Dune: Volume 1",
             "author" => "Frank Herbert",
             "description" => "Directed by Denis Villeneuve, based on the novel Dune by Frank Herbert",
@@ -46,18 +34,6 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "swap",
             "image" => "https://books.google.com/books/content/images/frontcover/p1MULH7JsTQC?fife=w240-h345"
-        ]);
-
-        Book::create([
-            "title" => "Iron Flame",
-            "author" => "Rebecca Yarros",
-            "description" => "Discover the instant #1 New York Times bestseller! Now optioned for TV by Amazon Studios.",
-            "category_id" => 4,
-            "user_id" => 4,
-            "status" => "new",
-            "availability" => "sale",
-            "price" => 150,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/xIS9EAAAQBAJ?fife=w240-h345"
         ]);
 
         Book::create([
@@ -80,6 +56,66 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "swap",
             "image" => "https://books.google.com/books/content/images/frontcover/AXVUqdzi3rsC?fife=w240-h345"
+        ]);
+
+        Book::create([
+            "title" => "Hello Beautiful (Oprah's Book Club): A Novel",
+            "author" => "Ann Napolitano",
+            "description" => "NEW YORK TIMES BESTSELLER • OPRAH’S BOOK CLUB PICK • From the author of Dear Edward comes a “powerfully affecting” (People) family story that asks: Can love make a broken person whole?",
+            "category_id" => 2,
+            "user_id" => 2,
+            "status" => "new",
+            "availability" => "sale",
+            "price" => 265,
+            "image" => "https://books.google.com/books/publisher/content/images/frontcover/KbZ9EAAAQBAJ?fife=w240-h345"
+        ]);
+
+        Book::create([
+            "title" => "Iron Flame",
+            "author" => "Rebecca Yarros",
+            "description" => "Discover the instant #1 New York Times bestseller! Now optioned for TV by Amazon Studios.",
+            "category_id" => 4,
+            "user_id" => 4,
+            "status" => "new",
+            "availability" => "sale",
+            "price" => 150,
+            "image" => "https://books.google.com/books/publisher/content/images/frontcover/xIS9EAAAQBAJ?fife=w240-h345"
+        ]);
+
+        Book::create([
+            "title" => "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+            "author" => "James Clear",
+            "description" => "No matter your goals, Atomic Habits offers a proven framework for improving--every day.",
+            "category_id" => 4,
+            "user_id" => 5,
+            "status" => "new",
+            "availability" => "sale",
+            "price" => 399,
+            "image" => "https://books.google.com/books/publisher/content/images/frontcover/lFhbDwAAQBAJ?fife=w240-h345"
+        ]);
+
+        Book::create([
+            "title" => "A Court of Frost and Starlight",
+            "author" => "Sarah J. Maas",
+            "description" => "Feyre, Rhysand, and their friends are still busy rebuilding the Night Court and the vastly altered world beyond.",
+            "category_id" => 4,
+            "user_id" => 5,
+            "status" => "used",
+            "availability" => "sale",
+            "price" => 189,
+            "image" => "https://books.google.com/books/publisher/content/images/frontcover/N2QzDwAAQBAJ?fife=w240-h345"
+        ]);
+
+        Book::create([
+            "title" => "The Silent Patient",
+            "author" => "Alex Michaelides",
+            "description" => "An unforgettable—and Hollywood-bound—new thriller... A mix of Hitchcockian suspense, Agatha Christie plotting, and Greek tragedy.",
+            "category_id" => 4,
+            "user_id" => 1,
+            "status" => "used",
+            "availability" => "sale",
+            "price" => 319,
+            "image" => "https://books.google.com/books/publisher/content/images/frontcover/tLdiDwAAQBAJ?fife=w240-h345"
         ]);
     }
 }

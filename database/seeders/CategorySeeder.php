@@ -16,6 +16,7 @@ class CategorySeeder extends Seeder
         // Category::truncate();
         Category::create(['name' => 'Fiction', 'color' => 'A2E2A8']);
         Category::create(['name' => 'Science Fiction', 'color' => 'FFD281']);
+        Category::create(['name' => 'Textbooks', 'color' => 'C7E6EB']);
         Category::create(['name' => 'Fantasy', 'color' => 'FFCEDE']);
         Category::create(['name' => 'Mystery', 'color' => '9CE6E0']);
         Category::create(['name' => 'Thriller', 'color' => 'D7D9BA']);
