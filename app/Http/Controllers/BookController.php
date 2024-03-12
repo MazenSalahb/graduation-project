@@ -31,6 +31,7 @@ class BookController extends Controller
             'status' => 'required|in:new,used',
             'availability' => 'required|in:swap,sale',
             'image' => 'required|image|mimes:jpeg,jpg,png,gif|required|max:2048',
+            'price' => 'nullable|numeric|min:0'
         ]);
 
         if ($request->hasFile('image')) {
@@ -50,6 +51,7 @@ class BookController extends Controller
             'category_id' => $request->category_id,
             'status' => $request->status,
             'availability' => $request->availability,
+            'price' => $request->price,
             'image' => $imagePath,
         ], ['user_id' => $user_id]));
         return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book], 201);
