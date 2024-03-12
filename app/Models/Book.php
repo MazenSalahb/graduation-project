@@ -33,12 +33,12 @@ class Book extends Model
             get: fn ($value) => ucfirst($value),
         );
     }
-    protected function Image(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => request()->getSchemeAndHttpHost() . $value,
-        );
-    }
+    // protected function Image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => request()->getSchemeAndHttpHost() . $value,
+    //     );
+    // }
     protected function CreatedAt(): Attribute
     {
         return Attribute::make(

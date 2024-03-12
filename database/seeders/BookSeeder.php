@@ -22,7 +22,7 @@ class BookSeeder extends Seeder
             "user_id" => 1,
             "status" => "new",
             "availability" => "swap",
-            "image" => "/images/theAlchemist.jpg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FtheAlchemist.jpg?alt=media&token=4d6db690-11a9-45c4-9f2b-20331a46eb6c",
         ]);
 
         Book::create([
@@ -33,7 +33,7 @@ class BookSeeder extends Seeder
             "user_id" => 3,
             "status" => "used",
             "availability" => "swap",
-            "image" => "/images/dune.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2Fdune.jpeg?alt=media&token=b9914a57-284a-4a0c-a00f-9e2fe4a71836",
         ]);
 
         Book::create([
@@ -44,7 +44,7 @@ class BookSeeder extends Seeder
             "user_id" => 5,
             "status" => "new",
             "availability" => "swap",
-            "image" => "/images/aCroutOfWings.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FaCroutOfWings.jpeg?alt=media&token=98eb9a12-ee4f-431a-891a-044a68e5f298",
         ]);
 
         Book::create([
@@ -55,7 +55,7 @@ class BookSeeder extends Seeder
             "user_id" => 6,
             "status" => "used",
             "availability" => "swap",
-            "image" => "/images/duneMessiah.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FduneMessiah.jpeg?alt=media&token=c9c3f4fe-4de7-4923-9d9a-79f933adb6ce",
         ]);
 
         Book::create([
@@ -67,7 +67,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 265,
-            "image" => "/images/helloBeautiful.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FhelloBeautiful.jpeg?alt=media&token=b6e9135c-772d-4f00-88de-7ddea9b752b3",
         ]);
 
         Book::create([
@@ -79,7 +79,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 150,
-            "image" => "/images/ironFlame.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FironFlame.jpeg?alt=media&token=2b17072a-b17a-4301-9f79-e8dd4b328c64",
         ]);
 
         Book::create([
@@ -91,7 +91,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 399,
-            "image" => "/images/atomicHabit.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FatomicHabit.jpeg?alt=media&token=768a4d15-52b9-434d-907e-a6c7114e8b1c",
         ]);
 
         Book::create([
@@ -103,7 +103,7 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "sale",
             "price" => 189,
-            "image" => "/images/aCroutOfFrost.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FaCroutOfFrost.jpeg?alt=media&token=b5d31f54-cdd8-4087-a6e6-61e160199c63",
         ]);
 
         Book::create([
@@ -115,7 +115,7 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "sale",
             "price" => 319,
-            "image" => "/images/theSilentPatient.jpeg",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/graduation-project-dd7d1.appspot.com/o/books%2FtheSilentPatient.jpeg?alt=media&token=1fa174e4-8216-4397-8b9e-b0ef4d5276ff",
         ]);
     }
 }

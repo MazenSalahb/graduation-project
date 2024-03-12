@@ -30,17 +30,17 @@ class BookController extends Controller
             'category_id' => 'required|exists:categories,id',
             'status' => 'required|in:new,used',
             'availability' => 'required|in:swap,sale',
-            'image' => 'required|image|mimes:jpeg,jpg,png,gif|required|max:2048',
+            'image' => 'required',
             'price' => 'nullable|numeric|min:0'
         ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $imagePath = public_path('/images');
-            $image->move($imagePath, $imageName);
-            $imagePath = "/images/" . $imageName;
-        }
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $imagePath = public_path('/images');
+        //     $image->move($imagePath, $imageName);
+        //     $imagePath = "/images/" . $imageName;
+        // }
 
         $user_id = auth()->user()->id; // Get the user_id from the authenticated user
 
@@ -52,7 +52,7 @@ class BookController extends Controller
             'status' => $request->status,
             'availability' => $request->availability,
             'price' => $request->price,
-            'image' => $imagePath,
+            'image' => $request->image,
         ], ['user_id' => $user_id]));
         return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book], 201);
     }
