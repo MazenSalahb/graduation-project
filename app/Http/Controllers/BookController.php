@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -28,12 +30,28 @@ class BookController extends Controller
             'category_id' => 'required|exists:categories,id',
             'status' => 'required|in:new,used',
             'availability' => 'required|in:swap,sale',
-            'image' => 'nullable',
+            'image' => 'required|image|mimes:jpeg,jpg,png,gif|required|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imagePath = public_path('/images');
+            $image->move($imagePath, $imageName);
+            $imagePath = "/images/" . $imageName;
+        }
 
         $user_id = auth()->user()->id; // Get the user_id from the authenticated user
 
-        $book = Book::create(array_merge($request->all(), ['user_id' => $user_id]));
+        $book = Book::create(array_merge([
+            'title' => $request->title,
+            'author' => $request->author,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'status' => $request->status,
+            'availability' => $request->availability,
+            'image' => $imagePath,
+        ], ['user_id' => $user_id]));
         return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book], 201);
     }
 
@@ -72,6 +90,14 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::find($id);
+        if ($book->image) {
+            $image_path = public_path() . parse_url($book->image, PHP_URL_PATH);  // Value will be something like /images/1710244736.png
+            // dd($image_path);
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+        }
+
         $book->delete();
         return response()->json(["status" => "success", "message" => "Book deleted successfully"], 200);
     }

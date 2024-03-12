@@ -22,7 +22,7 @@ class BookSeeder extends Seeder
             "user_id" => 1,
             "status" => "new",
             "availability" => "swap",
-            "image" => "https://images-na.ssl-images-amazon.com/images/I/71aFt4+OTOL.jpg"
+            "image" => "/images/theAlchemist.jpg",
         ]);
 
         Book::create([
@@ -33,7 +33,7 @@ class BookSeeder extends Seeder
             "user_id" => 3,
             "status" => "used",
             "availability" => "swap",
-            "image" => "https://books.google.com/books/content/images/frontcover/p1MULH7JsTQC?fife=w240-h345"
+            "image" => "/images/dune.jpeg",
         ]);
 
         Book::create([
@@ -44,7 +44,7 @@ class BookSeeder extends Seeder
             "user_id" => 5,
             "status" => "new",
             "availability" => "swap",
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/pLL-DAAAQBAJ?fife=w240-h345"
+            "image" => "/images/aCroutOfWings.jpeg",
         ]);
 
         Book::create([
@@ -55,7 +55,7 @@ class BookSeeder extends Seeder
             "user_id" => 6,
             "status" => "used",
             "availability" => "swap",
-            "image" => "https://books.google.com/books/content/images/frontcover/AXVUqdzi3rsC?fife=w240-h345"
+            "image" => "/images/duneMessiah.jpeg",
         ]);
 
         Book::create([
@@ -67,7 +67,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 265,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/KbZ9EAAAQBAJ?fife=w240-h345"
+            "image" => "/images/helloBeautiful.jpeg",
         ]);
 
         Book::create([
@@ -79,7 +79,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 150,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/xIS9EAAAQBAJ?fife=w240-h345"
+            "image" => "/images/ironFlame.jpeg",
         ]);
 
         Book::create([
@@ -91,7 +91,7 @@ class BookSeeder extends Seeder
             "status" => "new",
             "availability" => "sale",
             "price" => 399,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/lFhbDwAAQBAJ?fife=w240-h345"
+            "image" => "/images/atomicHabit.jpeg",
         ]);
 
         Book::create([
@@ -103,7 +103,7 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "sale",
             "price" => 189,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/N2QzDwAAQBAJ?fife=w240-h345"
+            "image" => "/images/aCroutOfFrost.jpeg",
         ]);
 
         Book::create([
@@ -115,7 +115,7 @@ class BookSeeder extends Seeder
             "status" => "used",
             "availability" => "sale",
             "price" => 319,
-            "image" => "https://books.google.com/books/publisher/content/images/frontcover/tLdiDwAAQBAJ?fife=w240-h345"
+            "image" => "/images/theSilentPatient.jpeg",
         ]);
     }
 }
