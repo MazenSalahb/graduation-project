@@ -35,7 +35,20 @@ class ReviewController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $review = Review::with('user')->find($id);
+        return response()->json($review);
+    }
+
+    public function userReviews(string $id)
+    {
+        $reviews = Review::where("user_id", $id)->with('user')->orderBy("created_at", "desc")->get();
+        return response()->json($reviews);
+    }
+
+    public function bookReviews(string $id)
+    {
+        $reviews = Review::where("book_id", $id)->with('user')->orderBy("created_at", "desc")->get();
+        return response()->json($reviews);
     }
 
     /**

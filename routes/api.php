@@ -3,6 +3,8 @@
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,4 +46,25 @@ Route::post('/categories', CategoryController::class . '@store');
 
 // Review routes
 Route::get('/reviews', ReviewController::class . '@index');
+Route::get('/reviews/{id}', ReviewController::class . '@show');
+Route::get('/reviews/user/{id}', ReviewController::class . '@userReviews');
+Route::get('/reviews/book/{id}', ReviewController::class . '@bookReviews');
 Route::post('/reviews', ReviewController::class . '@store')->middleware('auth:sanctum');
+
+
+// Chats routes
+Route::get('/chats', ChatController::class . '@index');
+Route::get('/chats/{id}', ChatController::class . '@show');
+Route::get('/chats/userBuying/{id}', ChatController::class . '@userBuyingChats');
+Route::get('/chats/userSelling/{id}', ChatController::class . '@userSellingChats');
+Route::get('/chats/book/{id}', ChatController::class . '@bookChats');
+Route::get('/chats/exist/{seller}/{buyer}/{bookid}', ChatController::class . '@checkChatExistence');
+Route::post('/chats', ChatController::class . '@store')->middleware('auth:sanctum');
+
+
+// Message routes
+Route::get('/messages', MessageController::class . '@index');
+Route::get('/messages/{id}', MessageController::class . '@show');
+Route::get('/messages/chat/{id}', MessageController::class . '@chatMessages');
+Route::post('/messages', MessageController::class . '@store')->middleware('auth:sanctum');
+Route::delete('/messages/{id}', MessageController::class . '@destroy')->middleware('auth:sanctum');
