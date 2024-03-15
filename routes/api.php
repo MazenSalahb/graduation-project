@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -68,3 +69,7 @@ Route::get('/messages/{id}', MessageController::class . '@show');
 Route::get('/messages/chat/{id}', MessageController::class . '@chatMessages');
 Route::post('/messages', MessageController::class . '@store')->middleware('auth:sanctum');
 Route::delete('/messages/{id}', MessageController::class . '@destroy')->middleware('auth:sanctum');
+
+
+// Notification routes
+Route::get('/notifications', NotificationController::class . '@index')->middleware('auth:sanctum');

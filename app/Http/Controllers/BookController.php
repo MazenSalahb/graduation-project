@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
+use App\Notifications\NewBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -34,14 +37,6 @@ class BookController extends Controller
             'price' => 'nullable|numeric|min:0'
         ]);
 
-        // if ($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
-        //     $imagePath = public_path('/images');
-        //     $image->move($imagePath, $imageName);
-        //     $imagePath = "/images/" . $imageName;
-        // }
-
         $user_id = auth()->user()->id; // Get the user_id from the authenticated user
 
         $book = Book::create(array_merge([
@@ -54,6 +49,10 @@ class BookController extends Controller
             'price' => $request->price,
             'image' => $request->image,
         ], ['user_id' => $user_id]));
+        if ($book) {
+            $users = User::where('id', '!=', $user_id)->get();
+            Notification::send($users, new NewBook($book->id, auth()->user()->name, $book->title, auth()->user()->profile_picture));
+        }
         return response()->json(["status" => "success", "message" => "Book created successfully", "data" => $book], 201);
     }
 
