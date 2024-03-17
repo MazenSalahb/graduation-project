@@ -73,7 +73,7 @@ class BookController extends Controller
 
     public function userBooks(string $id)
     {
-        $books = Book::where('user_id', $id)->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('user_id', $id)->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
