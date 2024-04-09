@@ -17,7 +17,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::where('availability', 'sale')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('availability', 'sale')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
@@ -61,13 +61,13 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        $book = Book::find($id);
+        $book = Book::with('user')->with('category')->find($id);
         return response()->json($book);
     }
 
     public function swap()
     {
-        $swapBooks = Book::where('availability', 'swap')->withAvg('reviews', 'rating')->latest()->take(10)->get();
+        $swapBooks = Book::where('availability', 'swap')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->take(10)->get();
         return response()->json($swapBooks);
     }
 

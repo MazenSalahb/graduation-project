@@ -23,11 +23,11 @@ class ReviewController extends Controller
     {
         $request->validate([
             "book_id" => "required|integer",
-            "rating" => "required|integer|between:1,5",
+            "rating" => "required|between:1,5",
             "review_text" => "nullable|string"
         ]);
         $review = Review::create(array_merge($request->all(), ["user_id" => auth()->user()->id]));
-        return response()->json($review);
+        return response()->json($review, 201);
     }
 
     /**
@@ -64,6 +64,11 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::find($id);
+        if (!$review) {
+            return response()->json(['message' => 'Review not found'], 404);
+        }
+        $review->delete();
+        return response()->json(['message' => 'Review deleted successfully'], 200);
     }
 }

@@ -51,6 +51,7 @@ Route::get('/reviews/{id}', ReviewController::class . '@show');
 Route::get('/reviews/user/{id}', ReviewController::class . '@userReviews');
 Route::get('/reviews/book/{id}', ReviewController::class . '@bookReviews');
 Route::post('/reviews', ReviewController::class . '@store')->middleware('auth:sanctum');
+Route::delete('/reviews/{id}', ReviewController::class . '@destroy')->middleware('auth:sanctum');
 
 
 // Chats routes
