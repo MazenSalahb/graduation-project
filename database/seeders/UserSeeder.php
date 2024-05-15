@@ -19,13 +19,16 @@ class UserSeeder extends Seeder
             "email" => "mazen@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
+            "phone" => "02111111111",
             'profile_picture' => 'https://api.multiavatar.com/mazen@gmail.com',
+            "role" => "admin"
         ]);
         User::create([
             "name" => "ahmed",
             "email" => "ahmed@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "Cairo",
+            "phone" => "03111111111",
             'profile_picture' => 'https://api.multiavatar.com/ahmed@gmail.com',
         ]);
         User::create([
@@ -33,6 +36,7 @@ class UserSeeder extends Seeder
             "email" => "joe@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "fayom",
+            "phone" => "01111111111",
             'profile_picture' => 'https://api.multiavatar.com/joe@gmail.com',
         ]);
         User::create([
@@ -40,6 +44,7 @@ class UserSeeder extends Seeder
             "email" => "zaki@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
+            "phone" => "04111111111",
             'profile_picture' => 'https://api.multiavatar.com/zaki@gmail.com',
         ]);
         User::create([
@@ -47,6 +52,7 @@ class UserSeeder extends Seeder
             "email" => "john@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "giza",
+            "phone" => "05111111111",
             'profile_picture' => 'https://api.multiavatar.com/john@gmail.com',
         ]);
         User::create([
@@ -54,6 +60,7 @@ class UserSeeder extends Seeder
             "email" => "ronaldo@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "matroh",
+            "phone" => "06111111111",
             'profile_picture' => 'https://api.multiavatar.com/ronaldo@gmail.com',
         ]);
         User::create([
@@ -61,6 +68,7 @@ class UserSeeder extends Seeder
             "email" => "fady@gmail.com",
             "password" => bcrypt("ma123456"),
             "location" => "suez",
+            "phone" => "07111111111",
             'profile_picture' => 'https://api.multiavatar.com/fady@gmail.com',
         ]);
     }

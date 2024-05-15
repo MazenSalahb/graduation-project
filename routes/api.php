@@ -36,7 +36,9 @@ Route::get('/books', BookController::class . '@index');
 Route::get('/books/swap', BookController::class . '@swap');
 Route::get('/books/{id}', BookController::class . '@show');
 Route::get('/books/user/{id}', BookController::class . '@userBooks');
+Route::get('/books/category/{id}', BookController::class . '@categoryBooks');
 Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
+Route::put('/books/{id}', BookController::class . '@update')->middleware('auth:sanctum');
 Route::delete('/books/{id}', BookController::class . '@destroy')->middleware('auth:sanctum');
 
 
@@ -74,3 +76,14 @@ Route::delete('/messages/{id}', MessageController::class . '@destroy')->middlewa
 
 // Notification routes
 Route::get('/notifications', NotificationController::class . '@index')->middleware('auth:sanctum');
+
+
+
+
+// * Admin routes
+Route::get('/admin/books/pending', BookController::class . '@pendingBooks');
+Route::get('/admin/books/approval', BookController::class . '@approvalBooks');
+Route::put('/admin/books/approve/{id}', BookController::class . '@approveBooks');
+Route::get('/admin/books/rejected', BookController::class . '@rejectedBooks');
+Route::put('/admin/books/reject/{id}', BookController::class . '@rejectBooks');
+// ->middleware('auth:sanctum', 'admin');

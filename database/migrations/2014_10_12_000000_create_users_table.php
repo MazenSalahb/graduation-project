@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->string('location');
             $table->string('profile_picture')->default('https://api.multiavatar.com/default');
             $table->enum('role', ['user', 'admin'])->default('user');

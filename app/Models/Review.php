@@ -28,4 +28,12 @@ class Review extends Model
             get: fn ($value) => \Carbon\Carbon::parse($value)->diffForHumans(),
         );
     }
+
+    // Accessor
+    protected function UpdatedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => \Carbon\Carbon::parse($value)->diffForHumans(),
+        );
+    }
 }

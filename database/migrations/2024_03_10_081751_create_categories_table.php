@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('icon')->default('https://cdn-icons-png.freepik.com/512/7580/7580377.png');
             $table->string('color')->default('B2B377');
             $table->timestamps();
         });

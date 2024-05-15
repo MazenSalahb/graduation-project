@@ -27,6 +27,7 @@ class UserController extends Controller
             $this->validate($request, [
                 "name" => "required|string",
                 "email" => "required|email|unique:users",
+                "phone" => "required|unique:users",
                 'location' => 'required|string',
                 'profile_picture' => 'nullable',
                 "password" => "required|string|min:6",
@@ -36,6 +37,7 @@ class UserController extends Controller
                 "name" => $request->name,
                 "email" => $request->email,
                 "location" => $request->location,
+                "phone" => $request->phone,
                 'profile_picture' => $request->profile_picture ?? 'https://api.multiavatar.com/' . $request->email,
                 "password" => bcrypt($request->password),
             ]);

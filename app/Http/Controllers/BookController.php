@@ -77,12 +77,26 @@ class BookController extends Controller
         return response()->json($books);
     }
 
+    public function categoryBooks(string $id)
+    {
+        $books = Book::where('category_id', $id)->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
+        return response()->json($books);
+    }
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'description' => 'required|max:255',
+            'price' => 'nullable|numeric|min:0'
+        ]);
+
+        $book = Book::find($id)->update($request->all());
+        return response()->json(["status" => "success", "message" => "Book updated successfully", "data" => $book], 200);
     }
 
     /**
@@ -101,5 +115,39 @@ class BookController extends Controller
 
         $book->delete();
         return response()->json(["status" => "success", "message" => "Book deleted successfully"], 200);
+    }
+
+    //* Admin routes
+
+    // books routes
+    public function pendingBooks()
+    {
+        $books = Book::where('approval_status', 'pending')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        return response()->json($books);
+    }
+    public function approvalBooks()
+    {
+        $books = Book::where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        return response()->json($books);
+    }
+    public function approveBooks(string $id)
+    {
+        $book = Book::find($id);
+        $book->approval_status = 'approved';
+        $book->save();
+        return response()->json(["status" => "success", "message" => "Book approved successfully"], 200);
+    }
+    public function rejectedBooks()
+    {
+        $books = Book::where('approval_status', 'rejected')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        return response()->json($books);
+    }
+
+    public function rejectBooks(string $id)
+    {
+        $book = Book::find($id);
+        $book->approval_status = 'rejected';
+        $book->save();
+        return response()->json(["status" => "success", "message" => "Book rejected successfully"], 200);
     }
 }

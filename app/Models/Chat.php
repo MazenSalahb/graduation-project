@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Chat extends Model
 {
@@ -25,5 +26,19 @@ class Chat extends Model
     public function book()
     {
         return $this->belongsTo(Book::class);
+    }
+
+    // Accessor
+    protected function CreatedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => \Carbon\Carbon::parse($value)->diffForHumans(),
+        );
+    }
+    protected function UpdatedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => \Carbon\Carbon::parse($value)->diffForHumans(),
+        );
     }
 }
