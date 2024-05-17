@@ -18,11 +18,12 @@ return new class extends Migration
             $table->string('description');
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->enum('status', ['new', 'used'])->default('new');
-            $table->enum('availability', ['swap', 'sale'])->default('sale');
+            $table->enum('availability', ['swap', 'sale', 'sold'])->default('sale');
             $table->enum('approval_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->double('price')->nullable();
             $table->string('image');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->date('featured')->nullable();
             $table->timestamps();
         });
     }

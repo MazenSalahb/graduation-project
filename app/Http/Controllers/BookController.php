@@ -150,4 +150,42 @@ class BookController extends Controller
         $book->save();
         return response()->json(["status" => "success", "message" => "Book rejected successfully"], 200);
     }
+
+    // search route
+    public function search(Request $request)
+    {
+        // dd($request->search);
+        try {
+            $request->validate([
+                'search' => 'required'
+            ]);
+
+            $query = $request->search;
+
+            $books = Book::where(function ($q) use ($query) {
+                $q->where('title', 'like', '%' . $query . '%')
+                    ->orWhere('author', 'like', '%' . $query . '%')
+                    ->orWhere('description', 'like', '%' . $query . '%');
+            })
+                ->with('user')
+                ->with('category')
+                ->withAvg('reviews', 'rating')
+                ->latest()
+                ->get();
+
+            if ($books->isEmpty()) {
+                return response()->json([
+                    "status" => "info", // Use "info" for not found cases
+                    "message" => "No books found matching your query."
+                ], 200);
+            }
+
+            return response()->json($books);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ], 500);
+        }
+    }
 }

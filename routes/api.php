@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookMarkController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
@@ -40,6 +41,8 @@ Route::get('/books/category/{id}', BookController::class . '@categoryBooks');
 Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
 Route::put('/books/{id}', BookController::class . '@update')->middleware('auth:sanctum');
 Route::delete('/books/{id}', BookController::class . '@destroy')->middleware('auth:sanctum');
+// Search route
+Route::post('/books/search', BookController::class . '@search');
 
 
 // Category routes
@@ -78,6 +81,12 @@ Route::delete('/messages/{id}', MessageController::class . '@destroy')->middlewa
 Route::get('/notifications', NotificationController::class . '@index')->middleware('auth:sanctum');
 
 
+// * Bookmarks routes
+Route::get('/bookmarks', BookMarkController::class . '@index');
+Route::get('/bookmarks/{id}', BookMarkController::class . '@show');
+Route::get('/bookmarks/user/{id}', BookMarkController::class . '@userBookmarks');
+Route::post('/bookmarks', BookMarkController::class . '@store');
+Route::delete('/bookmarks/{id}', BookMarkController::class . '@destroy')->middleware('auth:sanctum');
 
 
 // * Admin routes
