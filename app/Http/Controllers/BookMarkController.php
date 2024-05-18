@@ -18,7 +18,7 @@ class BookMarkController extends Controller
 
     public function userBookMarks($id)
     {
-        $bookMarks = BookMark::with('book.category', 'book.reviews')->where('user_id', $id)->get();
+        $bookMarks = BookMark::with('book.category', 'book.reviews', 'user')->where('user_id', $id)->get();
         return response()->json($bookMarks);
     }
 
