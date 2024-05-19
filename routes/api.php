@@ -30,6 +30,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users', UserController::class . '@index');
 Route::post('/signup', UserController::class . '@store')->middleware('guest');
 Route::post('/signin', UserController::class . '@login')->middleware('guest');
+Route::put('/users/{id}', UserController::class . '@update')->middleware('auth:sanctum');
+// Change password route
+Route::put('/users/{id}/password', UserController::class . '@changePassword')->middleware('auth:sanctum');
+// delete user route
+Route::delete('/users/{id}', UserController::class . '@destroy')->middleware('auth:sanctum');
 
 
 // Book routes

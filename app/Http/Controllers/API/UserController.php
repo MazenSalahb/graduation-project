@@ -93,14 +93,99 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        try {
+            $this->validate($request, [
+                "name" => "required|string",
+                "email" => "required|email|unique:users,email," . $id,
+                "phone" => "required|unique:users,phone," . $id,
+                // 'location' => 'required|string',
+                'profile_picture' => 'nullable',
+                "password" => "nullable|string|min:6",
+            ]);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            // $user->location = $request->location;
+            if ($request->has('profile_picture')) {
+                $user->profile_picture = $request->profile_picture;
+            }
+            if ($request->has('password')) {
+                $user->password = bcrypt($request->password);
+            }
+            $user->save();
+            return response()->json([
+                "status" => "success",
+                "message" => "User updated successfully",
+                "data" => $user,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "message" => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function changePassword(Request $request, string $id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $this->validate($request, [
+                "old_password" => "required|string",
+                "new_password" => "required|string|min:6",
+            ]);
+
+            if (!Hash::check($request->old_password, $user->password)) {
+                return response()->json([
+                    "status" => "error",
+                    "message" => "Invalid old password",
+                ], 401);
+            }
+
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return response()->json([
+                "status" => "success",
+                "message" => "Password changed successfully",
+                "data" => $user,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        try {
+            $this->validate($request, [
+                "password" => "required|string",
+            ]);
+
+            if (!Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    "status" => "error",
+                    "message" => "Invalid password",
+                ], 401);
+            }
+
+            $user->delete();
+            return response()->json([
+                "status" => "success",
+                "message" => "User deleted successfully",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "message" => $e->getMessage(),
+            ], 500);
+        }
     }
 }
