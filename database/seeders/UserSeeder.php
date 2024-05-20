@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
             "phone" => "02111111111",
-            'profile_picture' => 'https://api.multiavatar.com/mazen@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
             "role" => "admin"
         ]);
         User::create([
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "Cairo",
             "phone" => "03111111111",
-            'profile_picture' => 'https://api.multiavatar.com/ahmed@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
         User::create([
             "name" => "joe",
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "fayom",
             "phone" => "01111111111",
-            'profile_picture' => 'https://api.multiavatar.com/joe@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
         User::create([
             "name" => "zaki",
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "alexandria",
             "phone" => "04111111111",
-            'profile_picture' => 'https://api.multiavatar.com/zaki@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
         User::create([
             "name" => "john",
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "giza",
             "phone" => "05111111111",
-            'profile_picture' => 'https://api.multiavatar.com/john@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
         User::create([
             "name" => "ronaldo",
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "matroh",
             "phone" => "06111111111",
-            'profile_picture' => 'https://api.multiavatar.com/ronaldo@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
         User::create([
             "name" => "fady",
@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
             "password" => bcrypt("ma123456"),
             "location" => "suez",
             "phone" => "07111111111",
-            'profile_picture' => 'https://api.multiavatar.com/fady@gmail.com',
+            'profile_picture' => 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
         ]);
     }
 }

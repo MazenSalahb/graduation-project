@@ -38,7 +38,7 @@ class UserController extends Controller
                 "email" => $request->email,
                 "location" => $request->location,
                 "phone" => $request->phone,
-                'profile_picture' => $request->profile_picture ?? 'https://api.multiavatar.com/' . $request->email,
+                'profile_picture' => $request->profile_picture ?? 'https://i.pinimg.com/474x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg',
                 "password" => bcrypt($request->password),
             ]);
 
@@ -106,10 +106,11 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            // $user->location = $request->location;
-            if ($request->has('profile_picture')) {
+
+            if ($request->has('profile_picture') && $request->profile_picture != null) {
                 $user->profile_picture = $request->profile_picture;
             }
+
             if ($request->has('password')) {
                 $user->password = bcrypt($request->password);
             }

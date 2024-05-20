@@ -59,9 +59,10 @@ class BookMarkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookMark $bookMark)
+    public function destroy(string $id)
     {
+        $bookMark = BookMark::find($id);
         $bookMark->delete();
-        return response()->json($bookMark);
+        return response()->json(["status" => "success", "message" => "BookMark deleted successfully"]);
     }
 }
