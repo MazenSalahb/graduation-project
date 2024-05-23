@@ -72,6 +72,7 @@ Route::get('/chats/userSelling/{id}', ChatController::class . '@userSellingChats
 Route::get('/chats/book/{id}', ChatController::class . '@bookChats');
 Route::get('/chats/exist/{seller}/{buyer}/{bookid}', ChatController::class . '@checkChatExistence');
 Route::post('/chats', ChatController::class . '@store')->middleware('auth:sanctum');
+Route::delete('/chats/{id}', ChatController::class . '@destroy')->middleware('auth:sanctum');
 
 
 // Message routes
