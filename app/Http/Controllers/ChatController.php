@@ -46,6 +46,7 @@ class ChatController extends Controller
     {
         $chats = Chat::where('buyer_id', $id)
             ->orWhere('seller_id', $id)
+            ->whereColumn('seller_id', '!=', 'buyer_id')
             ->has('messages') // Only return chats with messages
             ->with('book', 'buyer', 'seller')
             ->get();
