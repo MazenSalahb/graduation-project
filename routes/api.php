@@ -46,6 +46,7 @@ Route::get('/books/category/{id}', BookController::class . '@categoryBooks');
 Route::post('/books', BookController::class . '@store')->middleware('auth:sanctum');
 Route::put('/books/{id}', BookController::class . '@update')->middleware('auth:sanctum');
 Route::delete('/books/{id}', BookController::class . '@destroy')->middleware('auth:sanctum');
+Route::put('/books/sold/{id}', BookController::class . '@sold')->middleware('auth:sanctum');
 // Search route
 Route::post('/books/search', BookController::class . '@search');
 
@@ -69,6 +70,7 @@ Route::get('/chats', ChatController::class . '@index');
 Route::get('/chats/{id}', ChatController::class . '@show');
 Route::get('/chats/userBuying/{id}', ChatController::class . '@userBuyingChats');
 Route::get('/chats/userSelling/{id}', ChatController::class . '@userSellingChats');
+Route::get('/chats/user/{id}', ChatController::class . '@userChats');
 Route::get('/chats/book/{id}', ChatController::class . '@bookChats');
 Route::get('/chats/exist/{seller}/{buyer}/{bookid}', ChatController::class . '@checkChatExistence');
 Route::post('/chats', ChatController::class . '@store')->middleware('auth:sanctum');

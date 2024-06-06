@@ -79,7 +79,7 @@ class BookController extends Controller
 
     public function categoryBooks(string $id)
     {
-        $books = Book::where('category_id', $id)->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('category_id', $id)->where('availability', '!=', 'sold')->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
@@ -149,6 +149,15 @@ class BookController extends Controller
         $book->approval_status = 'rejected';
         $book->save();
         return response()->json(["status" => "success", "message" => "Book rejected successfully"], 200);
+    }
+
+    // sold route
+    public function sold(string $id)
+    {
+        $book = Book::find($id);
+        $book->availability = 'sold';
+        $book->save();
+        return response()->json(["status" => "success", "message" => "Book marked as sold successfully"], 200);
     }
 
     // search route

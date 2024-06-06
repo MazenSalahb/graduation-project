@@ -42,6 +42,16 @@ class ChatController extends Controller
         return response()->json($chat);
     }
 
+    public function userChats(string $id)
+    {
+        $chats = Chat::where('buyer_id', $id)
+            ->orWhere('seller_id', $id)
+            ->has('messages') // Only return chats with messages
+            ->with('book', 'buyer', 'seller')
+            ->get();
+        return response()->json($chats);
+    }
+
     public function userBuyingChats(string $id)
     {
         $chats = Chat::where('buyer_id', $id)
