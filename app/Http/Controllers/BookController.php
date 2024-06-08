@@ -105,13 +105,13 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::find($id);
-        if ($book->image) {
-            $image_path = public_path() . parse_url($book->image, PHP_URL_PATH);  // Value will be something like /images/1710244736.png
-            // dd($image_path);
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
-        }
+        // if ($book->image) {
+        //     $image_path = public_path() . parse_url($book->image, PHP_URL_PATH);  // Value will be something like /images/1710244736.png
+        //     // dd($image_path);
+        //     if (File::exists($image_path)) {
+        //         File::delete($image_path);
+        //     }
+        // }
 
         $book->delete();
         return response()->json(["status" => "success", "message" => "Book deleted successfully"], 200);

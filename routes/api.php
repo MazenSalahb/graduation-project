@@ -103,4 +103,5 @@ Route::get('/admin/books/approval', BookController::class . '@approvalBooks');
 Route::put('/admin/books/approve/{id}', BookController::class . '@approveBooks');
 Route::get('/admin/books/rejected', BookController::class . '@rejectedBooks');
 Route::put('/admin/books/reject/{id}', BookController::class . '@rejectBooks');
+Route::delete('/admin/books/{id}', BookController::class . '@destroy');
 // ->middleware('auth:sanctum', 'admin');
