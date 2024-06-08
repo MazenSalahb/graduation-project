@@ -6,9 +6,7 @@ use App\Models\Book;
 use App\Models\User;
 use App\Notifications\NewBook;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -17,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::where('availability', 'sale')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('availability', 'sale')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
@@ -67,7 +65,7 @@ class BookController extends Controller
 
     public function swap()
     {
-        $swapBooks = Book::where('availability', 'swap')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->take(10)->get();
+        $swapBooks = Book::where('availability', 'swap')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->take(10)->get();
         return response()->json($swapBooks);
     }
 
@@ -79,7 +77,7 @@ class BookController extends Controller
 
     public function categoryBooks(string $id)
     {
-        $books = Book::where('category_id', $id)->where('availability', '!=', 'sold')->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('category_id', $id)->where('approval_status', 'approved')->where('availability', '!=', 'sold')->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
@@ -118,6 +116,12 @@ class BookController extends Controller
     }
 
     //* Admin routes
+
+    public function countBooks()
+    {
+        $books = Book::count();
+        return response()->json($books);
+    }
 
     // books routes
     public function pendingBooks()

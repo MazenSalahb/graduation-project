@@ -189,4 +189,10 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function countUsers()
+    {
+        $users = User::count();
+        return response()->json($users);
+    }
 }

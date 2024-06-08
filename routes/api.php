@@ -98,6 +98,8 @@ Route::delete('/bookmarks/{id}', BookMarkController::class . '@destroy')->middle
 
 
 // * Admin routes
+Route::get('/admin/books/count', BookController::class . '@countBooks');
+Route::get('/admin/users/count', UserController::class . '@countUsers');
 Route::get('/admin/books/pending', BookController::class . '@pendingBooks');
 Route::get('/admin/books/approval', BookController::class . '@approvalBooks');
 Route::put('/admin/books/approve/{id}', BookController::class . '@approveBooks');
