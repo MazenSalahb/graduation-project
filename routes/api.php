@@ -36,6 +36,8 @@ Route::put('/users/{id}/password', UserController::class . '@changePassword')->m
 // delete user route
 Route::delete('/users/{id}', UserController::class . '@destroy')->middleware('auth:sanctum');
 
+// Subscriptions routes
+Route::post('/books/subscribe', BookController::class . '@makeSubscription');
 
 // Book routes
 Route::get('/books', BookController::class . '@index');
@@ -49,7 +51,6 @@ Route::delete('/books/{id}', BookController::class . '@destroy')->middleware('au
 Route::put('/books/sold/{id}', BookController::class . '@sold')->middleware('auth:sanctum');
 // Search route
 Route::post('/books/search', BookController::class . '@search');
-
 
 // Category routes
 Route::get('/categories', CategoryController::class . '@index');
@@ -106,4 +107,7 @@ Route::put('/admin/books/approve/{id}', BookController::class . '@approveBooks')
 Route::get('/admin/books/rejected', BookController::class . '@rejectedBooks');
 Route::put('/admin/books/reject/{id}', BookController::class . '@rejectBooks');
 Route::delete('/admin/books/{id}', BookController::class . '@destroy');
+Route::get('/admin/subscription', BookController::class . '@allSubscriptions');
+Route::delete('/admin/subscription/{id}', BookController::class . '@cancelSubscription');
+
 // ->middleware('auth:sanctum', 'admin');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Notifications\NewBook;
 use Illuminate\Http\Request;
@@ -15,7 +16,19 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::where('availability', 'sale')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('availability', 'sale')
+            ->where('approval_status', 'approved')
+            ->with('user')
+            ->with('category')
+            ->with('subscription')
+            ->when(function ($query) {
+                $query->whereHas('subscription', function ($subQuery) {
+                    $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
+                });
+            })
+            ->withAvg('reviews', 'rating')
+            ->latest()
+            ->get();
         return response()->json($books);
     }
 
@@ -65,19 +78,35 @@ class BookController extends Controller
 
     public function swap()
     {
-        $swapBooks = Book::where('availability', 'swap')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->latest()->take(10)->get();
+        $swapBooks = Book::where('availability', 'swap')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->with('subscription')->when(function ($query) {
+            $query->whereHas('subscription', function ($subQuery) {
+                $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
+            });
+        })->latest()->take(10)->get();
         return response()->json($swapBooks);
     }
 
     public function userBooks(string $id)
     {
-        $books = Book::where('user_id', $id)->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('user_id', $id)->with('category')->with('subscription')->with('user')->withAvg('reviews', 'rating')->latest()->get();
         return response()->json($books);
     }
 
     public function categoryBooks(string $id)
     {
-        $books = Book::where('category_id', $id)->where('approval_status', 'approved')->where('availability', '!=', 'sold')->with('category')->with('user')->withAvg('reviews', 'rating')->latest()->get();
+        $books = Book::where('category_id', $id)
+            ->where('approval_status', 'approved')
+            ->where('availability', '!=', 'sold')
+            ->with('category')
+            ->with('user')
+            ->with('subscription')
+            ->withAvg('reviews', 'rating')
+            ->when(function ($query) {
+                $query->whereHas('subscription', function ($subQuery) {
+                    $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
+                });
+            })
+            ->latest()->get();
         return response()->json($books);
     }
 
@@ -103,14 +132,6 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Book::find($id);
-        // if ($book->image) {
-        //     $image_path = public_path() . parse_url($book->image, PHP_URL_PATH);  // Value will be something like /images/1710244736.png
-        //     // dd($image_path);
-        //     if (File::exists($image_path)) {
-        //         File::delete($image_path);
-        //     }
-        // }
-
         $book->delete();
         return response()->json(["status" => "success", "message" => "Book deleted successfully"], 200);
     }
@@ -200,5 +221,50 @@ class BookController extends Controller
                 "message" => $e->getMessage()
             ], 500);
         }
+    }
+
+    // subscription
+    public function makeSubscription(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+            'price' => 'required|numeric|min:0',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'user_id' => 'required|exists:users,id'
+        ]);
+
+
+        $subscription = Subscription::create([
+            'book_id' => $request->book_id,
+            'price' => $request->price,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'user_id' => $request->user_id
+        ]);
+
+        $book = Book::find($request->book_id);
+        $book->featured = $request->end_date;
+        $book->save();
+
+        return response()->json(["status" => "success", "message" => "Subscription created successfully", "data" => $subscription], 201);
+    }
+
+    public function allSubscriptions()
+    {
+        $subscriptions = Subscription::with('book')->with('user')->latest()->get();
+        return response()->json($subscriptions);
+    }
+
+    public function cancelSubscription(string $id)
+    {
+        $subscription = Subscription::find($id);
+        if ($subscription) {
+            $subscription->status = 'cancelled';
+            $subscription->save();
+        } else {
+            return response()->json(["status" => "error", "message" => "Subscription not found"], 404);
+        }
+        return response()->json(["status" => "success", "message" => "Subscription deactivated successfully"], 200);
     }
 }
