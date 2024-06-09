@@ -16,8 +16,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::where('availability', 'sale')
-            ->where('approval_status', 'approved')
+        $books = Book::where('approval_status', 'approved')
+            ->where('availability', 'sale')
             ->with('user')
             ->with('category')
             ->withAvg('reviews', 'rating')
@@ -84,9 +84,10 @@ class BookController extends Controller
 
     public function swap()
     {
-        $swapBooks = Book::where('availability', 'swap')
-            ->where('approval_status', 'approved')
-            ->with('user')->with('category')
+        $swapBooks = Book::where('approval_status', 'approved')
+            ->where('availability', 'swap')  // Filter by availability first
+            ->with('user')
+            ->with('category')
             ->withAvg('reviews', 'rating')
             ->with('subscription')
             ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
@@ -94,12 +95,15 @@ class BookController extends Controller
                 $query->where('subscriptions.status', 'active')
                     ->orWhere('subscriptions.status', 'cancelled')
                     ->orWhere('subscriptions.status', 'expired')
+                    ->orWhereNull('subscriptions.id')  // Include books without subscriptions
                     ->orderBy('subscriptions.end_date', 'asc');
             })
-            ->orWhereNull('subscriptions.id')
-            ->take(10)->get();
+
+            ->get(['books.*']);  // Retrieve only book columns to avoid conflicts
+
         return response()->json($swapBooks);
     }
+
 
     public function userBooks(string $id)
     {
