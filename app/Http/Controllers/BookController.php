@@ -27,9 +27,9 @@ class BookController extends Controller
                 $query->where('subscriptions.status', 'active')
                     ->orWhere('subscriptions.status', 'cancelled')
                     ->orWhere('subscriptions.status', 'expired')
+                    ->orWhereNull('subscriptions.id')
                     ->orderBy('subscriptions.end_date', 'asc');
             })
-            ->orWhereNull('subscriptions.id')
             ->get(); // Get only book columns to avoid column conflicts
 
         return response()->json($books);
