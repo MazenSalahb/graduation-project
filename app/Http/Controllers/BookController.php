@@ -20,17 +20,23 @@ class BookController extends Controller
             ->where('approval_status', 'approved')
             ->with('user')
             ->with('category')
-            ->with('subscription')
-            ->when(function ($query) {
-                $query->whereHas('subscription', function ($subQuery) {
-                    $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
-                });
-            })
             ->withAvg('reviews', 'rating')
-            ->latest()
-            ->get();
+            ->with('subscription')
+            ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
+            ->where(function ($query) {
+                $query->where('subscriptions.status', 'active')
+                    ->orWhere('subscriptions.status', 'cancelled')
+                    ->orWhere('subscriptions.status', 'expired')
+                    ->orderBy('subscriptions.end_date', 'asc');
+            })
+            ->orWhereNull('subscriptions.id')
+            ->get(); // Get only book columns to avoid column conflicts
+
         return response()->json($books);
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -78,11 +84,20 @@ class BookController extends Controller
 
     public function swap()
     {
-        $swapBooks = Book::where('availability', 'swap')->where('approval_status', 'approved')->with('user')->with('category')->withAvg('reviews', 'rating')->with('subscription')->when(function ($query) {
-            $query->whereHas('subscription', function ($subQuery) {
-                $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
-            });
-        })->latest()->take(10)->get();
+        $swapBooks = Book::where('availability', 'swap')
+            ->where('approval_status', 'approved')
+            ->with('user')->with('category')
+            ->withAvg('reviews', 'rating')
+            ->with('subscription')
+            ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
+            ->where(function ($query) {
+                $query->where('subscriptions.status', 'active')
+                    ->orWhere('subscriptions.status', 'cancelled')
+                    ->orWhere('subscriptions.status', 'expired')
+                    ->orderBy('subscriptions.end_date', 'asc');
+            })
+            ->orWhereNull('subscriptions.id')
+            ->take(10)->get();
         return response()->json($swapBooks);
     }
 
@@ -101,12 +116,7 @@ class BookController extends Controller
             ->with('user')
             ->with('subscription')
             ->withAvg('reviews', 'rating')
-            ->when(function ($query) {
-                $query->whereHas('subscription', function ($subQuery) {
-                    $subQuery->where('status', 'active')->orderBy('end_date', 'asc');
-                });
-            })
-            ->latest()->get();
+            ->get();
         return response()->json($books);
     }
 
