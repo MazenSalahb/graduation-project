@@ -255,12 +255,18 @@ class BookController extends Controller
         return response()->json($subscriptions);
     }
 
-    public function cancelSubscription(string $id)
+    public function cancelSubscription(string $id, Request $request)
     {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+        ]);
         $subscription = Subscription::find($id);
         if ($subscription) {
             $subscription->status = 'cancelled';
             $subscription->save();
+            $book = Book::find($request->book_id);
+            $book->featured = null;
+            $book->save();
         } else {
             return response()->json(["status" => "error", "message" => "Subscription not found"], 404);
         }
