@@ -233,20 +233,35 @@ class BookController extends Controller
             'user_id' => 'required|exists:users,id'
         ]);
 
-
-        $subscription = Subscription::create([
-            'book_id' => $request->book_id,
-            'price' => $request->price,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'user_id' => $request->user_id
-        ]);
-
         $book = Book::find($request->book_id);
-        $book->featured = $request->end_date;
-        $book->save();
 
-        return response()->json(["status" => "success", "message" => "Subscription created successfully", "data" => $subscription], 201);
+        // Check if the book has an existing subscription
+        $existingSubscription = Subscription::where('book_id', $request->book_id)->first();
+
+        if ($existingSubscription) {
+            // Modify the existing subscription
+            $existingSubscription->status = 'active';
+            $existingSubscription->start_date = $request->start_date;
+            $existingSubscription->end_date = $request->end_date;
+            $existingSubscription->price = $request->price;
+            $existingSubscription->save();
+        } else {
+            // Create a new subscription
+            $subscription = Subscription::create([
+                'book_id' => $request->book_id,
+                'price' => $request->price,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'user_id' => $request->user_id
+            ]);
+
+            $book->featured = $request->end_date;
+            $book->save();
+
+            return response()->json(["status" => "success", "message" => "Subscription created successfully", "data" => $subscription], 201);
+        }
+
+        return response()->json(["status" => "success", "message" => "Subscription modified successfully"], 200);
     }
 
     public function allSubscriptions()
