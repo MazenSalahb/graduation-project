@@ -245,6 +245,8 @@ class BookController extends Controller
             $existingSubscription->end_date = $request->end_date;
             $existingSubscription->price = $request->price;
             $existingSubscription->save();
+            $book->featured = $request->end_date;
+            $book->save();
         } else {
             // Create a new subscription
             $subscription = Subscription::create([
@@ -261,7 +263,7 @@ class BookController extends Controller
             return response()->json(["status" => "success", "message" => "Subscription created successfully", "data" => $subscription], 201);
         }
 
-        return response()->json(["status" => "success", "message" => "Subscription modified successfully"], 200);
+        return response()->json(["status" => "success", "message" => "Subscription modified successfully"], 201);
     }
 
     public function allSubscriptions()
