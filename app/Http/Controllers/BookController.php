@@ -25,10 +25,8 @@ class BookController extends Controller
             ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
             ->where(function ($query) {
                 $query->where('subscriptions.status', 'active')
-                    ->orWhere('subscriptions.status', 'cancelled')
-                    ->orWhere('subscriptions.status', 'expired')
                     ->orWhereNull('subscriptions.id')
-                    ->orderBy('subscriptions.end_date', 'asc');
+                    ->orderBy('featured', 'asc');
             })
             ->get(); // Get only book columns to avoid column conflicts
 
@@ -96,7 +94,7 @@ class BookController extends Controller
                     ->orWhere('subscriptions.status', 'cancelled')
                     ->orWhere('subscriptions.status', 'expired')
                     ->orWhereNull('subscriptions.id')  // Include books without subscriptions
-                    ->orderBy('subscriptions.end_date', 'asc');
+                    ->orderBy('featured', 'asc');
             })
 
             ->get(['books.*']);  // Retrieve only book columns to avoid conflicts
