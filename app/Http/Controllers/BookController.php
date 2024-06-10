@@ -22,12 +22,7 @@ class BookController extends Controller
             ->with('category')
             ->withAvg('reviews', 'rating')
             ->with('subscription')
-            ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
-            ->where(function ($query) {
-                $query->where('subscriptions.status', 'active')
-                    ->orWhereNull('subscriptions.id')
-                    ->orderBy('featured', 'asc');
-            })
+            ->orderBy('featured', 'desc')
             ->get(); // Get only book columns to avoid column conflicts
 
         return response()->json($books);
@@ -88,16 +83,8 @@ class BookController extends Controller
             ->with('category')
             ->withAvg('reviews', 'rating')
             ->with('subscription')
-            ->leftJoin('subscriptions', 'books.id', '=', 'subscriptions.book_id')
-            ->where(function ($query) {
-                $query->where('subscriptions.status', 'active')
-                    ->orWhere('subscriptions.status', 'cancelled')
-                    ->orWhere('subscriptions.status', 'expired')
-                    ->orWhereNull('subscriptions.id')  // Include books without subscriptions
-                    ->orderBy('featured', 'asc');
-            })
-
-            ->get(['books.*']);  // Retrieve only book columns to avoid conflicts
+            ->orderBy('featured', 'desc')
+            ->get();
 
         return response()->json($swapBooks);
     }
